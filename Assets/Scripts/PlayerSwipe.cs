@@ -9,6 +9,9 @@ public class PlayerSwipe : MonoBehaviour
     public FingersScript FingerScript;
     private SwipeGestureRecognizer swipeGesture;
 
+    [SerializeField]
+    private GameObject Player;
+
     private GestureTouch FirstTouch(ICollection<GestureTouch> touches)
     { 
         foreach(GestureTouch touch in touches) 
@@ -27,23 +30,26 @@ public class PlayerSwipe : MonoBehaviour
     {
         swipeGesture = new SwipeGestureRecognizer();
         swipeGesture.Direction = SwipeGestureRecognizerDirection.Any;
-        swipeGesture.Updated += SwipeGestureCallback;
-        swipeGesture.DirectionThreshold = 1.0f;
-        FingerScript.AddGesture(swipeGesture);
+        swipeGesture.StateUpdated += SwipeGestureCallback;
+        swipeGesture.DirectionThreshold = 1.0f; // allow a swipe, regardless of slope
+        FingersScript.Instance.AddGesture(swipeGesture);
     }
 
-    private void SwipeGestureCallback(GestureRecognizer gesture, ICollection<GestureTouch> touches) 
+    private void SwipeGestureCallback(GestureRecognizer gesture)
     {
-        if (gesture.State == GestureRecognizerState.Ended) 
+        if (gesture.State == GestureRecognizerState.Ended)
         {
-            GestureTouch t = FirstTouch(touches);
-
-            if (t.IsValid())
-            {
-                HandleSwipe(t.X, t.Y);
-                print("Swiped at "+ t.X + ", "+ t.Y + "; velocity: "+ swipeGesture.VelocityX + ", "+ swipeGesture.VelocityY + "");
-            }
+            //HandleSwipe(gesture.FocusX, gesture.FocusY);
+            PlayerFly(gesture);
+            //print("Swiped from "+ gesture.StartFocusX + ","+ gesture.StartFocusY + " to "+ gesture.FocusX + ","+ gesture.FocusY + "; velocity: "+ swipeGesture.VelocityX + ", " + swipeGesture.VelocityY);
         }
+    }
+
+    private void PlayerFly(GestureRecognizer gesture)
+    {
+        Vector2 direction = new Vector2(gesture.DeltaX, gesture.DeltaY);
+        //print(direction);
+        Player.GetComponent<Rigidbody>().AddForce(-direction.x * Constant.throwForce, direction.y * Constant.throwForce, 0);
     }
 
     // Update is called once per frame

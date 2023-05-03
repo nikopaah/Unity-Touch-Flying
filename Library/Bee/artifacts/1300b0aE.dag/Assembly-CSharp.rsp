@@ -363,6 +363,7 @@
 "Assets/FingersLite/Script/Gestures/ScaleGestureRecognizer.cs"
 "Assets/FingersLite/Script/Gestures/SwipeGestureRecognizer.cs"
 "Assets/FingersLite/Script/Gestures/TapGestureRecognizer.cs"
+"Assets/Scripts/Constant.cs"
 "Assets/Scripts/PlayerSwipe.cs"
 -langversion:9.0
 
