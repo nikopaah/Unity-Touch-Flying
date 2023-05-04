@@ -5,7 +5,7 @@ using UnityEngine;
 public class Constant : MonoBehaviour
 {
     public static float throwForce = 12f;
-    //public static float velocity = 1f;
+    public static float speed = 1f;
 
     [SerializeField]
     public static float distance = 10f;

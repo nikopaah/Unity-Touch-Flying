@@ -67,10 +67,10 @@
     <Compile Include="Assets\FingersLite\Script\Gestures\OneTouchRotateGestureRecognizer.cs" />
     <Compile Include="Assets\FingersLite\Script\Gestures\PanGestureRecognizer.cs" />
     <Compile Include="Assets\FingersLite\Script\Gestures\TapGestureRecognizer.cs" />
+    <Compile Include="Assets\Scripts\Constant.cs" />
     <Compile Include="Assets\FingersLite\Script\Gestures\DeviceInfo.cs" />
     <Compile Include="Assets\FingersLite\Script\Gestures\ScaleGestureRecognizer.cs" />
     <Compile Include="Assets\FingersLite\Script\Gestures\OneTouchScaleGestureRecognizer.cs" />
-    <Compile Include="Assets\Scripts\Constant.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\FingersLite\Readme.txt" />

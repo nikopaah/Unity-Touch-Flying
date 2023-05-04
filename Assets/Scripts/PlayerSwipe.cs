@@ -12,6 +12,8 @@ public class PlayerSwipe : MonoBehaviour
     [SerializeField]
     private GameObject Player;
 
+    private Vector3 MovementAmount;
+
     private GestureTouch FirstTouch(ICollection<GestureTouch> touches)
     { 
         foreach(GestureTouch touch in touches) 
@@ -49,12 +51,17 @@ public class PlayerSwipe : MonoBehaviour
     {
         Vector2 direction = new Vector2(gesture.DeltaX, gesture.DeltaY);
         //print(direction);
-        Player.GetComponent<Rigidbody>().AddForce(-direction.x * Constant.throwForce, direction.y * Constant.throwForce, 0);
+        //Player.GetComponent<Rigidbody>().AddForce(-direction.x * Constant.throwForce, direction.y * Constant.throwForce, 0);
+        MovementAmount.x = swipeGesture.VelocityX;
+        MovementAmount.z = swipeGesture.VelocityY;
+        print(MovementAmount);
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        MovementAmount = Constant.speed * Time.deltaTime * MovementAmount;
+        Player.transform.Translate(MovementAmount);   
     }
 }
